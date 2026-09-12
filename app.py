@@ -76,7 +76,7 @@ LOGIN='''<!doctype html><html><head><meta name="viewport" content="width=device-
 def login():
     if request.method=='POST':
         username=request.form.get('username','').strip(); password=request.form.get('password','')
-        c=db(); u=c.execute('SELECT * FROM users WHERE username=?',(username,)).fetchone(); c.close()
+        c=db(); u=execute(c, 'SELECT * FROM users WHERE username=?',(username,)).fetchone(); c.close() 
         if u:
             stored=u['password']; valid=False
             try: valid=check_password_hash(stored,password)
@@ -84,7 +84,7 @@ def login():
             if valid:
                 # Upgrade old plaintext accounts on first successful login.
                 if not stored.startswith(('scrypt:','pbkdf2:')):
-                    c=db(); c.execute('UPDATE users SET password=? WHERE id=?',(generate_password_hash(password),u['id'])); c.commit(); c.close()
+                    c=db(); execute(c, 'UPDATE users SET password=? WHERE id=?',(generate_password_hash(password),u['id'])); c.commit(); c.close()
                 session.clear(); session['user_id']=u['id']; return redirect(url_for('home'))
         return render_template_string(LOGIN,error='Invalid username or password',mode='login')
     return render_template_string(LOGIN,error=None,mode='login')
