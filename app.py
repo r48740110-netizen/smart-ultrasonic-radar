@@ -84,7 +84,7 @@ def login():
             if valid:
                 # Upgrade old plaintext accounts on first successful login.
                 if not stored.startswith(('scrypt:','pbkdf2:')):
-                    c=db(); execute(c, 'UPDATE users SET password=? WHERE id=?',(generate_password_hash(password),u['id'])); c.commit(); c.close()
+                    c=db(); execute(c, 'UPDATE users SET password=? WHERE id=?',(generate_password_hash(password),u['id'])); c.commit(); c.close() 
                 session.clear(); session['user_id']=u['id']; return redirect(url_for('home'))
         return render_template_string(LOGIN,error='Invalid username or password',mode='login')
     return render_template_string(LOGIN,error=None,mode='login')
