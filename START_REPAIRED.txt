@@ -1,0 +1,7 @@
+1. Replace your current app_online.py with app_online.py from this folder.
+2. Open PowerShell in: C:\Users\yadav\Downloads\radar system\smart ultrasonic app
+3. Run:
+   & "C:\Program Files\Python311\python.exe" app_online.py
+4. Open:
+   http://127.0.0.1:5002
+5. Press Ctrl+Shift+R once.
