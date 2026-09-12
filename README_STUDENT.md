@@ -34,3 +34,7 @@ The example sketch uses:
 - Servo signal = D6
 
 You can change the pins in the sketch for your own wiring.
+
+
+## Account model
+Each student creates their own account. No shared personal/admin login is required. Readings are stored against the logged-in user account.
